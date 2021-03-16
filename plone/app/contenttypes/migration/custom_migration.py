@@ -247,7 +247,7 @@ class CustomMigrationForm(BrowserView):
                 at_typename = form_at_typename.replace('_space_', ' ')
                 dx_typename = form_dx_typename.replace('_space_', ' ')
                 # the form_dx_typename should contain _space_  to match the dx_key
-                form_dx_typename.replace(' ', '_space_')
+                form_dx_typename = form_dx_typename.replace(' ', '_space_')
 
                 data[at_typename] = {'target_type': dx_typename,
                                      'field_mapping': []}
