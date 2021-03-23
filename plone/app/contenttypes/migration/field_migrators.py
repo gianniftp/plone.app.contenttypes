@@ -131,7 +131,7 @@ def migrate_filefield(src_obj, dst_obj, src_fieldname, dst_fieldname):
     This field needs to be migrated with an NamedBlobFile instance.
     """
     old_file = src_obj.getField(src_fieldname).get(src_obj)
-    if old_file == '':
+    if old_file in (None, ''):
         return
     filename = safe_unicode(old_file.filename)
     old_file_data = old_file.data
