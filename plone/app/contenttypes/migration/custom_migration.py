@@ -157,8 +157,8 @@ class CustomMigrationForm(BrowserView):
             return results
         for field in schema.fields():
             if not field.getName() in self.at_metadata_fields:
-                translated_label = translate(
-                    safe_unicode(field.widget.label))
+                translated_label = safe_unicode(
+                    translate(field.widget.label)).encode('UTF-8', errors="ignore")
                 results.append(
                     {'id': field.getName(),
                      'title': '{0} ({1})'.format(
@@ -183,7 +183,8 @@ class CustomMigrationForm(BrowserView):
         for field_name in obj.schema._fields:
             field = obj.schema._fields[field_name]
             if not field.getName() in self.at_metadata_fields:
-                translated_label = translate(field.widget.label)
+                translated_label = safe_unicode(
+                    translate(field.widget.label)).encode('UTF-8', errors="ignore")
                 results.append(
                     {'id': field.getName(),
                      'title': '{0} ({1})'.format(
@@ -207,7 +208,7 @@ class CustomMigrationForm(BrowserView):
                 # ignore Dublin Core fields
                 if fieldName in self.dx_metadata_fields:
                     continue
-                translated_title = translate(field.title)
+                translated_title = safe_unicode(translate(field.title)).encode('UTF-8', errors="ignore")                
                 class_name = field.__class__.__name__
                 results.append(
                     {'id': fieldName,
